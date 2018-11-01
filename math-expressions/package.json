@@ -1,0 +1,18 @@
+{
+  "name": "math-expressions",
+  "version": "0.0.1",
+  "description": "parse and evaluate math expressions using an ast",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.specs.js"
+  },
+  "author": "jarvispact <jarvispact@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
+  }
+}
