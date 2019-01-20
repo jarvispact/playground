@@ -1,32 +1,23 @@
-const precedenceMap = {
-    '+': 1,
-    '-': 1,
-    '*': 2,
-    '/': 2,
-};
-
-const createStack = (array) => {
-    const stack = Array.isArray(array) ? [...array] : [];
-
-    return {
-        push: token => stack.push(token),
-        pop: () => stack.pop(),
-        top: () => stack[stack.length - 1],
-        getElements: () => stack,
-        hasElements: () => stack.length > 0,
-    };
-};
+const createStack = require('./create-stack');
+const getOperatorPrecedence = require('./get-operator-precedence');
+const isClosingParenthesis = require('./is-closing-parenthesis');
+const isDot = require('./is-dot');
+const isNumber = require('./is-number');
+const isOpeningParenthesis = require('./is-opening-parenthesis');
+const isOperand = require('./is-operand');
+const isOperator = require('./is-operator');
+const isVariable = require('./is-variable');
+const isWhitespace = require('./is-whitespace');
 
 module.exports = {
-    isOperator: token => ['+', '-', '*', '/'].includes(token),
-    isOperand: token => /^(\d+|\d+.\d+)$/.test(token),
-    isNumber: token => /^\d+$/.test(token),
-    isDot: token => token === '.',
-    isComma: token => token === ',',
-    isOpeningParenthesis: token => token === '(',
-    isClosingParenthesis: token => token === ')',
-    getPrecedence: operator => precedenceMap[operator],
-    isEmptyString: (token = '') => token.trim() === '',
-    replaceCommasWithDots: token => token.replace(',', '.'),
     createStack,
+    getOperatorPrecedence,
+    isClosingParenthesis,
+    isDot,
+    isNumber,
+    isOpeningParenthesis,
+    isOperand,
+    isOperator,
+    isVariable,
+    isWhitespace,
 };

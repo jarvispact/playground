@@ -1,38 +1,17 @@
-const tokenize = require('./tokenize');
-const toRPN = require('./to-rpn');
-const toAST = require('./to-ast');
-const evaluate = require('./evaluate');
-const { createStack } = require('./utils');
+const evaluate = require('./src/evaluate');
+const infixToAst = require('./src/infix-to-ast');
+const infixToRpnArray = require('./src/infix-to-rpn-array');
+const infixToRpn = require('./src/infix-to-rpn');
+const tokenize = require('./src/tokenize');
+const validate = require('./src/validate');
+const utils = require('./utils');
 
-const Expression = class {
-    constructor(infixExpression) {
-        this.infixExpression = infixExpression;
-    }
-
-    setInfixExpression(infixExpression) {
-        this.infixExpression = infixExpression;
-    }
-
-    tokenize() {
-        return tokenize(this.infixExpression);
-    }
-
-    toRPN() {
-        const tokens = tokenize(this.infixExpression);
-        return toRPN(tokens).join(' ');
-    }
-
-    toAST() {
-        const tokens = tokenize(this.infixExpression);
-        const rpnArray = toRPN(tokens);
-        const stack = createStack(rpnArray);
-        return toAST(stack);
-    }
-
-    evaluate() {
-        const ast = this.toAST();
-        return evaluate(ast);
-    }
+module.exports = {
+    evaluate,
+    infixToAst,
+    infixToRpnArray,
+    infixToRpn,
+    tokenize,
+    validate,
+    utils,
 };
-
-module.exports = { Expression };

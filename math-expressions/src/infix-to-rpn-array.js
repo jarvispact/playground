@@ -1,6 +1,8 @@
-const { createStack, isOperand, isOperator, isOpeningParenthesis, isClosingParenthesis, getPrecedence } = require('./utils');
+const { createStack, isOperand, isOperator, isOpeningParenthesis, isClosingParenthesis, getOperatorPrecedence } = require('../utils');
+const tokenize = require('./tokenize');
 
-module.exports = (tokens) => {
+module.exports = (infixExpression = '') => {
+    const tokens = tokenize(infixExpression);
     const stack = createStack();
     const rpn = [];
 
@@ -19,11 +21,11 @@ module.exports = (tokens) => {
         }
 
         if (isOperator(token)) {
-            const tokenPrecedence = getPrecedence(token);
-            const topStackElementPrecedence = getPrecedence(stack.top());
+            const tokenPrecedence = getOperatorPrecedence(token);
+            const topStackElementPrecedence = getOperatorPrecedence(stack.top());
 
             if (tokenPrecedence < topStackElementPrecedence) {
-                while (stack.hasElements() && tokenPrecedence <= getPrecedence(stack.top())) rpn.push(stack.pop());
+                while (stack.hasElements() && tokenPrecedence <= getOperatorPrecedence(stack.top())) rpn.push(stack.pop());
                 stack.push(token);
             } else if (tokenPrecedence > topStackElementPrecedence) {
                 stack.push(token);

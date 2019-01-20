@@ -4,7 +4,7 @@
   "description": "parse and evaluate math expressions using an ast",
   "main": "index.js",
   "scripts": {
-    "test": "mocha *.specs.js"
+    "test": "mocha src/**/*.specs.js"
   },
   "author": "jarvispact <jarvispact@gmail.com>",
   "license": "MIT",
