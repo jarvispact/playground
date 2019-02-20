@@ -42,7 +42,8 @@ const evaluateAst = (ast, { variables, precision }) => {
     const rightValue = isOperand(right) ? right : evaluateAst(right, { variables, precision });
 
     const computedValue = operatorMap[operator](leftValue, rightValue);
-    return typeof computedValue === 'number' && precision ? computedValue.toFixed(precision) : computedValue.toString();
+    if (typeof computedValue !== 'number') throw new Error('all variables need to be resolved');
+    return precision ? computedValue.toFixed(precision) : computedValue.toString();
 };
 
 module.exports = (ast, { variables, precision } = {}) => {

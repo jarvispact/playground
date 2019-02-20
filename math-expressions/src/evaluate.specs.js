@@ -56,27 +56,15 @@ describe('evaluate', () => {
         });
     });
 
-    describe('only variables', () => {
-        it('should evaluate a simple infix expression with variables', () => {
-            const result = evaluate('x + y');
-            expect(result).to.equal('x + y');
-        });
-
-        it('should evaluate a simple infix expression with variables', () => {
-            const result = evaluate('x + y + z - abc * i / j');
-            expect(result).to.equal('x + y + z - abc * i / j');
-        });
-    });
-
     describe('numbers and variables', () => {
         it('should evaluate a simple infix expression with mixed numbers and variables', () => {
-            const result = evaluate('2 + x', { precision: 2 });
-            expect(result).to.equal('2 + x');
+            const result = evaluate('2 + x', { precision: 2, variables: { x: '4' } });
+            expect(result).to.equal('6.00');
         });
 
         it('should evaluate a simple infix expression with mixed numbers and variables', () => {
-            const result = evaluate('x + 2', { precision: 2 });
-            expect(result).to.equal('x + 2');
+            const result = evaluate('x + 2', { precision: 2, variables: { x: '4' } });
+            expect(result).to.equal('6.00');
         });
     });
 
